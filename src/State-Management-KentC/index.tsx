@@ -1,12 +1,7 @@
 import React, { useState } from 'react';
 
 import Counter from './components/Counter'
-
-
-interface ICounterDisplayProps {
-    count: number
-}
-const CounterDisplay = ({count}: ICounterDisplayProps) => (<div>The current counter count is {count}</div>)
+import CounterDisplay from './components/CounterDisplay';
 
 const StateManagementKentC = (): JSX.Element => {
     const [count, setCount] = useState(0)
