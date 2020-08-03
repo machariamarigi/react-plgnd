@@ -1,15 +1,7 @@
 import React, { useState } from 'react';
 
-const Hello = ({who}: { who: string }) => <p>Hello, { who }</p>
+import Counter from './components/Counter'
 
-interface ICounterProps{
-    count: number,
-    onIncrementClick: () => void
-}
-
-const Counter = ({ count, onIncrementClick }: ICounterProps) => {
-    return <button onClick={onIncrementClick}>{count}</button>
-}
 
 interface ICounterDisplayProps {
     count: number
@@ -23,8 +15,7 @@ const StateManagementKentC = (): JSX.Element => {
 
     return (
         <div>
-            <h1>IOC-REACT</h1>
-            <Hello who="Macharia Marigi"/> 
+            <h1>Application State Management</h1>
             <CounterDisplay count={count} />
             <Counter count={count} onIncrementClick={increment} />
         </div>
