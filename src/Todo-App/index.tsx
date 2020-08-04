@@ -1,9 +1,11 @@
 import React, { Fragment, useState } from "react";
+
 import TodoForm from "./components/Todo-Form";
+import TodoList from "./components/Todo-List";
 
 export type FormElement = React.FormEvent<HTMLElement>
 
-interface ITodo {
+export interface ITodo {
     text: string
     complete: boolean
 }
@@ -43,19 +45,7 @@ const TodoApp = (): JSX.Element => {
         <Fragment>
             <h1>TODO LIST</h1>
             <TodoForm value={value} handleSubmit={handleSubmit} handeleChange={handleChange}></TodoForm>
-            <section>
-                {todos.map((todo: ITodo, index: number) => (
-                    <Fragment key={index}>
-                        <div style={{ textDecoration: todo.complete ? 'line-through': '' }}>{todo.text}</div>
-                        <button type='button' onClick={() => toggleCompleteTodo(index)}>
-                            { todo.complete? 'Incomplete': 'Complete' }
-                        </button>
-                        <button type='button' onClick={() => removeTodo(index)}>Delete</button>
-                    </Fragment>
-                    
-                )
-                )}
-            </section>
+            <TodoList todos={todos} toggleCompleteTodo={toggleCompleteTodo} removeTodo={removeTodo} ></TodoList>
         </Fragment>
     )
 }
