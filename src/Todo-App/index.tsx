@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from "react";
+import TodoForm from "./components/Todo-Form";
 
-type FormElement = React.FormEvent<HTMLElement>
+export type FormElement = React.FormEvent<HTMLElement>
 
 interface ITodo {
     text: string
@@ -15,6 +16,10 @@ const TodoApp = (): JSX.Element => {
         event.preventDefault()
         addTodo(value)
         setValue('')
+    }
+
+    const handleChange = (value: string): void => {
+        setValue(value)
     }
 
     const addTodo =(text: string): void => {
@@ -37,10 +42,7 @@ const TodoApp = (): JSX.Element => {
     return (
         <Fragment>
             <h1>TODO LIST</h1>
-            <form onSubmit={handleSubmit}>
-                <input type="text" value={value} onChange={e => setValue(e.target.value)} required />
-                <button type="submit">Add Todo</button>
-            </form>
+            <TodoForm value={value} handleSubmit={handleSubmit} handeleChange={handleChange}></TodoForm>
             <section>
                 {todos.map((todo: ITodo, index: number) => (
                     <Fragment key={index}>
