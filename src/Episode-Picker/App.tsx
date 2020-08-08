@@ -2,6 +2,22 @@ import React, { Fragment, useContext, useEffect } from 'react';
 
 import { Store } from './Store';
 
+interface IEpisode {
+    id: number
+    name: string
+    airdate: string
+    airtime: string
+    airstamp: string
+    image: {
+        medium: string
+    }
+    number: number
+    runtime: number
+    season: number
+    summary: string
+    url: string
+}
+
 const App = (): JSX.Element => {
     const {state, dispatch} = useContext(Store) // context hook
 
@@ -24,6 +40,21 @@ const App = (): JSX.Element => {
         <Fragment>
             <h1>Rick And Morty Episode picker</h1>
             <p>Pick your favourite episode</p>
+            <section className="episode-layout">
+                {
+                    state.episodes.map((episode: IEpisode): JSX.Element => {
+                        return (
+                            <section key={episode.id}>
+                                <img src={episode.image.medium} alt={`Rick and Morty ${episode.name}`}/>
+                                <div>{episode.name}</div>
+                                <section>
+                                    Season: {episode.season} Number: {episode.number}
+                                </section>
+                            </section>
+                        )
+                    })
+                }
+            </section>
         </Fragment>
     )
 
