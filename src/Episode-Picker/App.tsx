@@ -38,13 +38,16 @@ const App = (): JSX.Element => {
 
     return (
         <Fragment>
-            <h1>Rick And Morty Episode picker</h1>
-            <p>Pick your favourite episode</p>
+            <header className="header">
+                <h1>Rick And Morty Episode picker</h1>
+                <p>Pick your favourite episode</p> 
+            </header>
+
             <section className="episode-layout">
                 {
                     state.episodes.map((episode: IEpisode): JSX.Element => {
                         return (
-                            <section key={episode.id}>
+                            <section key={episode.id} className="episode-card">
                                 <img src={episode.image.medium} alt={`Rick and Morty ${episode.name}`}/>
                                 <div>{episode.name}</div>
                                 <section>
