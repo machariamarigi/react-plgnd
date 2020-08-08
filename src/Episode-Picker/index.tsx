@@ -1,12 +1,16 @@
-import React, { Fragment } from 'react';
 
-const App =  (): JSX.Element => {
+import React from 'react';
+
+import { StoreProvider } from './Store';
+import App from './App';
+
+const EpisodePickerShell =  (): JSX.Element => {
     return (
-        <Fragment>
-            <h1>Rick And Morty Episode picker</h1>
-            <p>Pick your favourite episode</p>
-        </Fragment>
+        <StoreProvider>
+            <App />
+        </StoreProvider>
+
     )
 }
 
-export default App;
+export default EpisodePickerShell;
