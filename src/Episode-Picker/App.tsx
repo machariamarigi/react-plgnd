@@ -1,25 +1,10 @@
 import React, { Fragment, useContext, useEffect } from 'react';
 
 import { Store } from './Store';
-
-interface IEpisode {
-    id: number
-    name: string
-    airdate: string
-    airtime: string
-    airstamp: string
-    image: {
-        medium: string
-    }
-    number: number
-    runtime: number
-    season: number
-    summary: string
-    url: string
-}
+import { IEpisode, IAction, IState } from './intefaces';
 
 const App = (): JSX.Element => {
-    const {state, dispatch} = useContext(Store) // context hook
+    const {state, dispatch}: {state: IState, dispatch: any} = useContext(Store) // context hook
 
     useEffect(() => {
         state.episodes.length === 0 && fetchDataAction()
@@ -36,6 +21,23 @@ const App = (): JSX.Element => {
         })
     }
 
+    const isEpisodeInFavourites = (episode: IEpisode): boolean => state.favourites.includes(episode)
+
+    const ToggleFavouriteAction = (episode: IEpisode): IAction => {
+        let dispatchObject = {
+            type: 'ADD_FAV',
+            payload: episode         
+        }
+
+        if (isEpisodeInFavourites(episode)) {
+            dispatchObject = {
+                type: 'REMOVE_FAV',
+                payload: episode
+            }
+        }
+        return dispatch(dispatchObject)
+    }
+
     return (
         <Fragment>
             <header className="header">
@@ -47,11 +49,19 @@ const App = (): JSX.Element => {
                 {
                     state.episodes.map((episode: IEpisode): JSX.Element => {
                         return (
-                            <section key={episode.id} className="episode-card">
+                            <section 
+                                key={episode.id} 
+                                className="episode-card" 
+                                style={{background: isEpisodeInFavourites(episode)? 'cyan': ''}}>
                                 <img src={episode.image.medium} alt={`Rick and Morty ${episode.name}`}/>
                                 <div>{episode.name}</div>
                                 <section>
-                                    Season: {episode.season} Number: {episode.number}
+                                    <div>
+                                        Season: {episode.season} Number: {episode.number}
+                                    </div>
+                                    <button type='button' onClick={() => ToggleFavouriteAction(episode)}>
+                                        {isEpisodeInFavourites(episode) ? 'Unfavourite' : 'Favourite' }
+                                    </button>
                                 </section>
                             </section>
                         )
