@@ -1,7 +1,9 @@
-import React, { Fragment, useContext, useEffect } from 'react';
+import React, { Fragment, useContext, useEffect, lazy, Suspense } from 'react';
 
 import { Store } from './Store';
 import { IEpisode, IAction, IState } from './intefaces';
+
+const EpisodeList = lazy(() => import('./components/EpisodeList'))
 
 const App = (): JSX.Element => {
     const {state, dispatch}: {state: IState, dispatch: any} = useContext(Store) // context hook
@@ -23,7 +25,7 @@ const App = (): JSX.Element => {
 
     const isEpisodeInFavourites = (episode: IEpisode): boolean => state.favourites.includes(episode)
 
-    const ToggleFavouriteAction = (episode: IEpisode): IAction => {
+    const ToggleFavouriteEpisode = (episode: IEpisode): IAction => {
         let dispatchObject = {
             type: 'ADD_FAV',
             payload: episode         
@@ -44,30 +46,14 @@ const App = (): JSX.Element => {
                 <h1>Rick And Morty Episode picker</h1>
                 <p>Pick your favourite episode</p> 
             </header>
-
-            <section className="episode-layout">
-                {
-                    state.episodes.map((episode: IEpisode): JSX.Element => {
-                        return (
-                            <section 
-                                key={episode.id} 
-                                className="episode-card" 
-                                style={{background: isEpisodeInFavourites(episode)? 'cyan': ''}}>
-                                <img src={episode.image.medium} alt={`Rick and Morty ${episode.name}`}/>
-                                <div>{episode.name}</div>
-                                <section>
-                                    <div>
-                                        Season: {episode.season} Number: {episode.number}
-                                    </div>
-                                    <button type='button' onClick={() => ToggleFavouriteAction(episode)}>
-                                        {isEpisodeInFavourites(episode) ? 'Unfavourite' : 'Favourite' }
-                                    </button>
-                                </section>
-                            </section>
-                        )
-                    })
-                }
-            </section>
+            <Suspense fallback={<div>Loading ...</div>}>
+                <EpisodeList 
+                    episodes={state.episodes}
+                    toggleFavouriteEpisode={ToggleFavouriteEpisode} 
+                    isEpisodeInFavourites={isEpisodeInFavourites}
+                />
+            </Suspense>
+            
         </Fragment>
     )
 
