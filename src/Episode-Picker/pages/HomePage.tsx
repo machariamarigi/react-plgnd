@@ -19,6 +19,7 @@ export default function HomePage() {
                     episodes={state.episodes}
                     toggleFavouriteEpisode={ToggleFavouriteEpisode} 
                     favourites={state.favourites}
+                    dispatch={dispatch}
                 />
             </Suspense>
         </Fragment>
