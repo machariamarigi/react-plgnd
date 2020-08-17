@@ -3,7 +3,7 @@ import { Link } from '@reach/router';
 
 interface IProps {
     path: string
-    children: any
+    children: JSX.Element[]
 }
 
 const App = (props: IProps): JSX.Element => {
