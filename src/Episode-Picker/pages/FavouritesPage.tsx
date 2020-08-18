@@ -1,14 +1,14 @@
 import React, { lazy, useContext, Suspense, Fragment } from 'react'
 
 import { Store } from '../Store'
-import { IState } from '../intefaces'
+import { IState, Dispatch } from '../intefaces'
 import { ToggleFavouriteEpisode } from '../actions'
 import { Link } from '@reach/router'
 
 const EpisodeList = lazy(() => import('../components/EpisodeList'))
 
 export default function FavouritesPage() {
-    const { state, dispatch } : {state: IState, dispatch: any} = useContext(Store)
+    const { state, dispatch } : {state: IState, dispatch: Dispatch} = useContext(Store)
 
     return (
         <Fragment>

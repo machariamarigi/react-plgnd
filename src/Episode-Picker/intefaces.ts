@@ -14,6 +14,8 @@ export interface IEpisode {
     url: string
 }
 
+export type Dispatch = React.Dispatch<IAction>
+
 export interface IState {
     episodes: Array<IEpisode>
     favourites: Array<IEpisode>

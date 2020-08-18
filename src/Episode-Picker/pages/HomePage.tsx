@@ -1,12 +1,12 @@
 import React, { useEffect, useContext, lazy, Suspense, Fragment } from 'react'
-import { IEpisode, IAction, IState } from '../intefaces'
+import { IState, Dispatch } from '../intefaces'
 import { Store } from '../Store'
 import { fetchDataAction, ToggleFavouriteEpisode } from '../actions'
 
 const EpisodeList = lazy(() => import('../components/EpisodeList'))
 
 export default function HomePage() {
-    const {state, dispatch}: {state: IState, dispatch: any} = useContext(Store) // context hook
+    const {state, dispatch}: {state: IState, dispatch: Dispatch} = useContext(Store) // context hook
 
     useEffect(() => {
         state.episodes.length === 0 && fetchDataAction(dispatch)

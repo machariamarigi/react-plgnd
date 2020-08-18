@@ -1,17 +1,16 @@
 import React, { useContext } from 'react';
-import { IEpisode, IAction, IState } from '../intefaces';
+import { IEpisode, Dispatch } from '../intefaces';
 import { isEpisodeInFavourites } from '../helpers';
-import { Store } from '../Store';
 
 interface IProps {
     episodes: IEpisode[]
     toggleFavouriteEpisode: (
         episode: IEpisode,
         favourites: IEpisode[],
-        dispatch: any
+        dispatch: Dispatch
     ) => any
     favourites: IEpisode[],
-    dispatch: any
+    dispatch: Dispatch
 }
 
 export default function EpisodeList (

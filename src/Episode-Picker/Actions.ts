@@ -1,8 +1,7 @@
-import { Dispatch } from "react"
-import { IEpisode, IAction } from "./intefaces"
+import { IEpisode, IAction, Dispatch } from "./intefaces"
 import { isEpisodeInFavourites } from "./helpers"
 
-export const fetchDataAction = async (dispatch: Dispatch<any>) => {
+export const fetchDataAction = async (dispatch: Dispatch) => {
 
     const url = 'https://api.tvmaze.com/singlesearch/shows?q=rick-&-morty&embed=episodes'
     const data = await fetch(url)
@@ -13,7 +12,7 @@ export const fetchDataAction = async (dispatch: Dispatch<any>) => {
     })
 }
 
-export const ToggleFavouriteEpisode = (episode: IEpisode, favourites: IEpisode[], dispatch: Dispatch<any>) => {
+export const ToggleFavouriteEpisode = (episode: IEpisode, favourites: IEpisode[], dispatch: Dispatch) => {
     let dispatchObject = {
         type: 'ADD_FAV',
         payload: episode         
