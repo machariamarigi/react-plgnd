@@ -16,7 +16,7 @@ const App = (props: IProps): JSX.Element => {
                 </div>
 
                 <div>
-                    <Link to="/home">Home</Link>
+                    <Link to="/">Home</Link>
                     <Link to="/favourites">Favourites</Link>
                 </div>
             </header>
